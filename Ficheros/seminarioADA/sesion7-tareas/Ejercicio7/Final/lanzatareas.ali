@@ -1,0 +1,80 @@
+V "GNAT Lib v3.13 "
+M P W=b
+A -g
+P
+R nnvvnnnvnnnnvvvvnvvvvvnnvnnnnnvnnnvnnnnnnnn
+
+U lanzatareas%b		lanzatareas.adb		4BE6E362 NE SU IL
+W ada.exceptions%s	a-except.adb		a-except.ali
+W kernel%s		kernel.ads		kernel.ali
+W kernel.serial_output%s  kernel-serial_output.adb  kernel-serial_output.ali
+W system%s		system.ads		system.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.parameters%s	s-parame.adb		s-parame.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.task_info%s	s-tasinf.adb		s-tasinf.ali
+W system.tasking%s	s-taskin.adb		s-taskin.ali
+W system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
+W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+
+D ada.ads		20000718095948 2359F9ED
+D a-except.ads		20000718095948 287FCF69
+D a-finali.ads		20000718095948 3F32DEEF
+D a-filico.ads		20000718095948 1DECB9AC
+D a-stream.ads		20000718095948 5F7C277B
+D a-tags.ads		20000718095948 45EF7E4E
+D kernel.ads		20010312182047 56BBE4F1
+D kernel-cpu_primitives.ads  20010312182047 5746D7AD
+D kernel-parameters.ads	20010312182047 0D1B8F78
+D kernel-serial_output.ads  20010312182047 16AD38F4
+D kernel-threads.ads	20010312182047 234DAE87
+D kernel-time.ads	20010312182047 7A57ECF4
+D lanzatareas.adb	20190923154401 5D4BDB96
+D system.ads		20010312182047 2AE5BAFE
+D s-exctab.ads		20000718095948 7A25F5F9
+D s-finimp.ads		20000718095949 1C201C0F
+D s-finroo.ads		20000718095949 166D4EDA
+D s-imgint.ads		20000718095949 21B5CB31
+D s-parame.ads		20000718095949 25FE086A
+D s-secsta.ads		20000718095949 60A2A5CD
+D s-soflin.ads		20000718095949 006B24D7
+D s-stache.ads		20000718095949 42B57F2A
+D s-stalib.ads		20000718095949 438B3864
+D s-stoele.ads		20000718095949 131D4539
+D s-stratt.ads		20000718095949 1761725B
+D s-tasinf.ads		20000718095949 0F7BBEC5
+D s-taspri.ads		20010312182047 3235B2AC
+D s-taskin.ads		20000718095949 09146F23
+D s-taprob.ads		20000718095949 1D5668B3
+D s-tassta.ads		20000718095949 72B0D55C
+D s-unstyp.ads		20000718095949 78AFB91D
+D unchconv.ads		20000718095949 72DC4539
+X 7 kernel.ads
+36U9*Kernel 13|2r6 2r32
+X 10 kernel-serial_output.ads
+36U16*Serial_Output 13|2r13 2r39
+41U14*Put 13|25r9 25r45 33r9 38r9 39r9 44r9 59r9 66r9 67r9
+43U14*New_Line 13|27r9 34r9 45r9 60r9 68r9
+X 13 lanzatareas.adb
+4U11*lanzatareas
+7A6 Tipo_Vector 18r26
+8t6 ordenar
+9t6 sumavector
+10t6 mayor
+12w11 Vector_Compartido 74r1 75r1 79r1 80r1 84r1 85r1
+13U19 Imprimir_Vector 22b19 75r19 80r19 85r19
+14U19 Ordenar_Vector 41b19 74r19
+15U19 CalcularMayor_Vector 56b19 84r19
+16U19 Suma_Vector 30b19 79r19
+18a17 Vector 25r27 36r24 46r32 47r24 48r14 48r32 49r22 50r14 50r33 51r14
+. 62r12 63r19
+24i13 indice 25r34
+31i9 suma 36m9 36r17 39r27
+35i13 indice 36r31
+42i9 Temp 49m14 51r33
+46i13 indiceI 47r40 48r21 50r40 51r21
+47i13 IndiceJ 48r39 49r29 50r21
+57i9 maxNum 62r29 63m9 67r27
+61i13 indice 62r19 63r26
+
