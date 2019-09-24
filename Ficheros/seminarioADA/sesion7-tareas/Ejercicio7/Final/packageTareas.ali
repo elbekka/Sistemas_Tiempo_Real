@@ -1,32 +1,32 @@
 V "GNAT Lib v8"
-M P W=b
 P ZX
 
 RN
 RV NO_IO
-RV NO_LOCAL_PROTECTED_OBJECTS
-RV NO_PROTECTED_TYPES
 RV NO_STANDARD_STORAGE_POOLS
-RV NO_TASK_HIERARCHY
 RV NO_TASKING
 RV NO_DEFAULT_INITIALIZATION
+RV NO_ELABORATION_CODE
 RV SPARK_05
-RV MAX_TASKS=1+
+RV MAX_TASKS=3
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U lanzatareas%b		lanzatareas.adb		512f3e3b NE OO SU IL
+U packagetareas%b	packageTareas.adb	d74da4b3 OO PK IL
 W ada%s			ada.ads			ada.ali
-Z ada.exceptions%s	a-except.adb		a-except.ali
-Z ada.real_time%s	a-reatim.adb		a-reatim.ali
 Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W packagefuncionesvector%s  packagefuncionesvector.adb  packagefuncionesvector.ali  AD
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+
+U packagetareas%s	packagetareas.ads	3b22ad46 EE OO PK
+Z ada.real_time%s	a-reatim.adb		a-reatim.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
 Z system%s		system.ads		system.ali
-Z system.img_int%s	s-imgint.adb		s-imgint.ali
 Z system.parameters%s	s-parame.adb		s-parame.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
 Z system.task_info%s	s-tasinf.adb		s-tasinf.ali
 Z system.tasking%s	s-taskin.adb		s-taskin.ali
-Z system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
 Z system.tasking.stages%s  s-tassta.adb		s-tassta.ali
 
 D ada.ads		20170911084841 76789da1 ada%s
@@ -40,13 +40,14 @@ D a-unccon.ads		20170908151217 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20180111085525 5ab55268 interfaces%s
 D i-c.ads		20170908151217 5421119b interfaces.c%s
 D i-cstrea.ads		20180111085525 e53d8b8e interfaces.c_streams%s
-D lanzatareas.adb	20190924133511 d9328d61 lanzatareas%b
+D packagefuncionesvector.ads  20190924134457 c87fe40c packagefuncionesvector%s
+D packagetareas.ads	20190924135623 3b22ad46 packagetareas%s
+D packageTareas.adb	20190924135649 ac0d5ea3 packagetareas%b
 D system.ads		20180111085525 4635ec04 system%s
 D s-atacco.ads		20180111085525 4c36d12f system.address_to_access_conversions%s
 D s-crtl.ads		20180111085525 0ebbdb71 system.crtl%s
 D s-exctab.ads		20180111085525 54135002 system.exception_table%s
 D s-ficobl.ads		20180111085525 078245e4 system.file_control_block%s
-D s-imgint.ads		20180111085525 02dbe0c2 system.img_int%s
 D s-linux.ads		20180111085525 2fda6ad1 system.linux%s
 D s-multip.ads		20170908151217 38ac9f73 system.multiprocessors%s
 D s-oscons.ads		20190406144455 2a880dab system.os_constants%s
@@ -68,33 +69,22 @@ D s-traent.ads		20180111085525 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20180111085525 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20180111085525 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 20e8 12|2r6 2r23
+16K9*Ada 20e8 14|1r6 1r23
 X 7 a-textio.ads
-49K13*Text_IO 471e16 12|2w10 2r27
-166U14*New_Line 12|27s9 34s9 45s9 60s9 68s9
-242U14*Put 12|25s9 25s45 33s9 38s9 39s9 44s9 59s9 66s9 67s9
-X 12 lanzatareas.adb
-4U11*lanzatareas 4b11 89l5 89t16
-7A6 Tipo_Vector(integer)<integer> 18r26
-8t6 ordenar 72b11 76l5 76t12
-9t6 sumavector 77b11 81l5 81t15
-10t6 mayor 82b11 86l5 86t10
-12w11 Vector_Compartido 21b16 70l5 70t22 74r1 75r1 79r1 80r1 84r1 85r1
-13U19 Imprimir_Vector 22b19 28l13 28t28 75s19 80s19 85s19
-14U19 Ordenar_Vector 41b19 55l13 55t27 74s19
-15U19 CalcularMayor_Vector 56b19 69l13 69t33 84s19
-16U19 Suma_Vector 30b19 40l13 40t24 79s19
-18a17 Vector{7A6} 25r27 36r24 46r32 47r24 48r14 48r32 49r22 50r14 50r33 51r14
-. 62r12 63r19
-24i13 indice{integer} 25r34
-31i9 suma{integer} 36m9 36r17 39r27
-35i13 indice{integer} 36r31
-42i9 Temp{integer} 49m14 51r33
-46i13 indiceI{integer} 47r40 48r21 50r40 51r21
-47i13 IndiceJ{integer} 48r39 49r29 50r21
-57i9 maxNum{integer} 62r29 63m9 67r27
-61i13 indice{integer} 62r19 63r26
-X 27 s-stausa.ads
+49K13*Text_IO 471e16 14|1w10 1r27
+X 12 packagefuncionesvector.ads
+1K9*packagefuncionesVector 12e27 14|2w6 2r33
+3w11*Vector_Compartido 14|6r1 7r1 11r1 12r1 16r1 17r1
+4U19 Imprimir_Vector 14|7s19 12s19 17s19
+5U19 Ordenar_Vector 14|6s19
+6U19 CalcularMayor_Vector 14|16s19
+7U19 Suma_Vector 14|11s19
+X 13 packagetareas.ads
+1K9*packageTareas 5l5 5e18 14|3b14 19l5 19t18
+2t6*ordenar 14|4b11 8l5 8t12
+3t6*sumavector 14|9b11 13l5 13t15
+4t6*mayor 14|14b11 18l5 18t10
+X 28 s-stausa.ads
 203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
 268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
 
