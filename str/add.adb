@@ -59,9 +59,9 @@ package body add is
             --                    else Light (Off); end if;
 
          -- Prueba velocidad
-            Reading_Speed (Current_V);
-            Display_Speed (Current_V);
-            if (Current_V > 110) then Beep (2); end if;
+            --Reading_Speed (Current_V);
+            --Display_Speed (Current_V);
+            --if (Current_V > 110) then Beep (2); end if;
 
          -- Prueba Posicion de la cabeza
             --Reading_HeadPosition (Current_H);

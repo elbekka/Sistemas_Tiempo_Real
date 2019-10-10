@@ -1,4 +1,4 @@
-with Kernel.Serial_Output; use Kernel.Serial_Output;
+with Ada.Serial_Output; use Ada.Serial_Output;
 with packagefuncionesvector;use packagefuncionesvector;
 package body packagetareas is
 task body ordenar is
