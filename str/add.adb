@@ -26,17 +26,76 @@ package body add is
     -----------------------------------------------------------------------
     ------------- declaration of tasks 
     -----------------------------------------------------------------------
-
+      task GuardardistanciaSeguridad;
+      task Guardarcabeza_inclinada;
+      task Riesgos;
+      task Display;
     -- Aqui se declaran las tareas que forman el STR
-
-
     -----------------------------------------------------------------------
     ------------- body of tasks 
     -----------------------------------------------------------------------
 
+task body GuardardistanciaSeguridad is 
+    velocidad: Speed_Samples_Type := 0;
+    distanciaR: Distance_Samples_Type := 0;
+    distanciaSeg: Distance_Samples_Type := 0;
+    Siguiente_instancia: Time;
+    Intervalo : Time_Span:=to_Time_Span(0.3);
+    begin
+	loop
+         Starting_Notice ("Tarea Distancia Seguridad");
+	Siguiente_instancia:=clock+Intervalo;
+	Reading_Speed(velocidad);
+	Reading_Distance (distanciaR);
+	distanciaSeg:= Distance_Samples_Type ((velocidad/10)*(velocidad/10));
+	if((distanciaR/3) < distanciaSeg) then
+	   --Light(ON);
+	   --Peligro de colision
+	elsif((distancia/2)<distanciaSeg)then
+	   --Light(OFF);
+	   --Distancia imprudente
+	else
+	   --No hay peligro
+	end if;
+      Finishing_Notice  ("Finaliza Distancia Seguridad ");
+    	delay until Siguiente_instancia;
+    	Siguiente_instancia:=Siguiente_instancia+Intervalo;
+    	end loop;
+    end GuardardistanciaSeguridad;
     -- Aqui se escriben los cuerpos de las tareas 
 
+task body Guardarcabeza_inclinada is
+    Siguiente_instancia: Time; 
+    giro_del_volante: Steering_Samples_Type := 0;
+    Intervalo : Time_Span:=to_Time_Span(0.4);
+    act: HeadPosition_Samples_Type;
+    ant: HeadPosition_Samples_Type;
+    begin
+	loop
+      Starting_Notice ("Tarea Cabeza inclinada");
+         Siguiente_instancia:=clock+Intervalo;
+	Reading_HeadPosition(act);
+        
+	if((act(x)>(30) and  ant(x)>(30)) or (act(x)<(-30) and ant(x)<(-30))) then 
+         Put_Line("la cabeza esta inclinada hacia delante o hacia atrás");
+        elsif (((ant(y)>(30)) and (act(y)>(30))) and(giro_del_volante>(5))) then
+          Put_Line("no hay somnolencia, estamos girando");
+        elsif (((ant(y)<(-30)) and (act(y)<(-30))) and (giro_del_volante<(-5))) then
+           Put_Line("no hay somnolencia, estamos girando");
+        elsif ((act(y)>(30) or act(y)<(-30)) and (giro_del_volante<(5) or giro_del_volante>(-5))) then
+          Put_Line("sintoma de somnolencia");
+        else 
+         Put_Line("no esta la cabeza inclinada");
+	end if;
 
+	ant(x):=act(x);
+        ant(y):=act(y);
+           Finishing_Notice  ("Finaliza Tarea Cabeza inclinada");
+       	delay until Siguiente_instancia;
+	Siguiente_instancia:=Siguiente_instancia+Intervalo;
+        
+        end loop;
+        end Guardarcabeza_inclinada;
     ----------------------------------------------------------------------
     ------------- procedure para probar los dispositivos 
     ----------------------------------------------------------------------
