@@ -1,8 +1,6 @@
 
 package body sintomas is 
 
-    procedure ProcedureSintomas is 
-
     protected Cabeza is
         pragma priority (Ceiling_Priority_of_P);
         procedure LeerCabeza(cabezaOut : out Boolean);
@@ -38,12 +36,9 @@ package body sintomas is
 
         procedure EscribirDistancia (distanciaIn : in Natural) is
         begin
-        DistanDistanciaVarcia:=distanciaIn;
+        DistanciaVar:=distanciaIn;
         end EscribirDistancia;
         end Distancia;
-        begin 
-        null;
-end ProcedureSintomas;
 begin
     null;
 end sintomas;
