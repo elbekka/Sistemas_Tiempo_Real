@@ -4,39 +4,41 @@ package body sintomas is
     procedure ProcedureSintomas is 
 
     protected Cabeza is
+        pragma priority (Ceiling_Priority_of_P);
         procedure LeerCabeza(cabezaOut : out Boolean);
         Procedure EscribirCabeza(cabezaIn : in Boolean);
         private
-        Cabeza : Boolean := False;
+        CabezaVar : Boolean := False;
         end Cabeza;
     protected Distancia is
+        pragma priority (Ceiling_Priority_of_P);
         Procedure LeerDistancia(distanciaOut:out Natural);
         Procedure EscribirDistancia(distanciaIn:in Natural);
         private
-        Distancia : Natural range 1..3;
+        DistanciaVar : Natural range 1..3;
         end Distancia;
 
     --Body Cabeza
     protected body Cabeza is 
         Procedure LeerCabeza(cabezaOut : out Boolean) is
         begin
-            cabezaOut:= Cabeza;
+            cabezaOut:= CabezaVar;
         end LeerCabeza;
         Procedure EscribirCabeza (cabezaIn : in Boolean) is 
         begin
-        Cabeza:=cabezaIn;
+        CabezaVar:=cabezaIn;
         end EscribirCabeza;
         end Cabeza;
 
     protected body Distancia is 
         Procedure LeerDistancia(distanciaOut : out Natural) is 
         begin 
-            distanciaOut:=Distancia;
+            distanciaOut:=DistanciaVar;
         end LeerDistancia;
 
         procedure EscribirDistancia (distanciaIn : in Natural) is
         begin
-        Distancia:=distanciaIn;
+        DistanDistanciaVarcia:=distanciaIn;
         end EscribirDistancia;
         end Distancia;
         begin 
