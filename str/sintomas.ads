@@ -1,13 +1,13 @@
 package sintomas is 
     protected Cabeza is
-        pragma priority (Ceiling_Priority_of_P);
+        pragma priority (1);
         procedure LeerCabeza(cabezaOut : out Boolean);
         Procedure EscribirCabeza(cabezaIn : in Boolean);
         private
         CabezaVar : Boolean := False;
         end Cabeza;
     protected Distancia is
-        pragma priority (Ceiling_Priority_of_P);
+        pragma priority (1);
         Procedure LeerDistancia(distanciaOut:out Natural);
         Procedure EscribirDistancia(distanciaIn:in Natural);
         private
