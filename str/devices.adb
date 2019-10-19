@@ -29,7 +29,6 @@ package body devices is
         Sensores_Electrodos.Reading_Sensors (L);
       end Reading_Sensors;
 
-
     protected body Sensores_Electrodos is
       procedure Reading_Sensors (L: out EEG_Samples_Type)  is
          type Time_index is delta 0.1 range 0.0..100.0;
@@ -241,10 +240,58 @@ package body devices is
 
     end Lectura_HeadPosition;
 
+   ---------------------------------------------------------------------
+   -- Procedures to get current steering wheel position  
+   ---------------------------------------------------------------------
+
+    protected Lectura_Volante is
+       procedure Reading_Steering (S: out Steering_Samples_Type);
+       procedure Reaction (Level: in integer);
+    private
+      i: Indice_Secuencia_Volante := 1;
+      Secuencia: tipo_Secuencia_Volante := Steering_Simulation;
+    end Lectura_Volante;
+
+    procedure Reading_Steering (S: out Steering_Samples_Type) is
+      begin
+        Lectura_Volante.Reading_Steering (S);
+      end Reading_Steering;
+
+    protected body Lectura_Volante is
+      procedure Reading_Steering (S: out Steering_Samples_Type)  is
+         type Time_index is delta 0.1 range 0.0..100.0;
+         t: Time_index;
+      begin
+         t := Time_index(To_Duration(Clock - Big_Bang));
+         i := Indice_Secuencia_Volante (integer(t * 10.0) mod 100);
+         S := Secuencia(i);
+         --i := i + 1;
+         Execution_Time (WCET_Steering);
+      end Reading_Steering;
+
+      procedure Reaction (Level: in integer) is
+         type Time_index is delta 0.1 range 0.0..100.0;
+         t: Time_index;
+         j: Indice_Secuencia_Volante := 1;
+      begin
+         t := Time_index(To_Duration(Clock - Big_Bang));
+         j := Indice_Secuencia_Volante (t * 10.0);
+         if (Level = 1) then
+           for k in j..j+4 loop
+              secuencia (k):= (Steering_Samples_Type(70));
+           end loop; 
+         elsif (Level = 2) then 
+           for k in i..Indice_Secuencia_Volante'Last loop
+              Secuencia (k):= (Steering_Samples_Type(70)); 
+           end loop;
+         end if;
+      end Reaction;
+
+    end Lectura_Volante;
+
 ---------------------------------------------------------------------
 --     Cuerpo de los procedmientos y objetos para DISPOSITIVOS E/S 
 ---------------------------------------------------------------------
-
 procedure Display_Pulse_Rate (P: Values_Pulse_Rate) is
 begin
    Current_Time (Big_Bang);
@@ -253,7 +300,7 @@ begin
    Print_an_Integer (Integer(P));
    Execution_Time (WCET_Display);
 end Display_Pulse_Rate;
-
+-----------------------------------------------------------------------------
 procedure Display_Distance (D: Distance_Samples_Type) is
 begin
    Current_Time (Big_Bang);
@@ -262,7 +309,7 @@ begin
    Print_an_Integer (Integer(D));
    Execution_Time (WCET_Distance);
 end Display_Distance;
-
+-----------------------------------------------------------------------------
 procedure Display_Speed (V: Speed_Samples_Type) is
 begin
    Current_Time (Big_Bang);
@@ -271,6 +318,15 @@ begin
    Print_an_Integer (Integer(V));
    Execution_Time (WCET_Speed);
 end Display_Speed;
+-----------------------------------------------------------------------------
+procedure Display_Steering (S: Steering_Samples_Type) is
+begin
+   Current_Time (Big_Bang);
+   Put ("............# ");
+   Put ("Steering: ");
+   Print_an_Integer (Integer(S));
+   Execution_Time (WCET_Steering);
+end Display_Steering;
 ---------------------------------------------------------------------
 procedure Display_HeadPosition_Sample (H: HeadPosition_Samples_Type) is
 
@@ -281,14 +337,6 @@ begin
    for i in HeadPosition_Samples_Index loop
       Print_an_Integer (Integer(H(i)));
    end loop;
-
---   Average := (R(Right) + R(Left))/2;
---   if Average > 80 then    Put ("   (O,O)");
---   elsif Average > 60 then Put ("   (o,o)");
---   elsif Average > 30 then Put ("   (*,*)");
---   else                    Put ("   (-,-)");
---   end if;
-
    Execution_Time (WCET_Display);
 end Display_HeadPosition_Sample;
 -----------------------------------------------------------------------------
@@ -302,8 +350,7 @@ begin
    end loop;
    Execution_Time (WCET_Display);
 end Display_Electrodes_Sample;
-
-
+-----------------------------------------------------------------------------
 procedure Display_Eyes_Sample (R: Eyes_Samples_Type) is
  Average: Eyes_Samples_Values;
 begin
@@ -323,8 +370,7 @@ begin
 
    Execution_Time (WCET_Display);
 end Display_Eyes_Sample;
-
-
+-----------------------------------------------------------------------------
 procedure Display_Cronometro (Origen : Ada.Real_Time.Time; Hora: Ada.Real_Time.Time ) is
   type Crono is delta 0.1 range 0.0..100.0;
 begin
@@ -333,8 +379,7 @@ begin
   --Put (Duration'Image(To_Duration(Clock - Origen)));
   Put (Crono'Image(Crono(To_Duration(Hora - Origen))));
 end Display_Cronometro;
-
-
+-----------------------------------------------------------------------------
 
 procedure Light (E: Light_States) is
 begin
@@ -346,7 +391,7 @@ begin
    Execution_Time (WCET_Light);
 end Light;
 
-
+-----------------------------------------------------------------------------
 
 procedure Beep (v: Volume) is 
     -- emite un sonido durante 0.3 segundos con volumne "v"
@@ -362,7 +407,7 @@ begin
   Execution_Time (WCET_Alarm);
   --Lectura_EyesImage.Reaction (EYES_REACTION_WHEN_BEEP);
 end Beep;
-
+-----------------------------------------------------------------------------
 
 procedure Activate_Automatic_Driving is
 begin
@@ -370,7 +415,14 @@ begin
    Put ("!!!! Automatic driving system activated !!!!");
    Execution_Time (WCET_Automatic_Driving);
 end Activate_Automatic_Driving;
+-----------------------------------------------------------------------------
 
+procedure Activate_Brake is
+begin
+   Current_Time (Big_Bang);
+   Put ("!!!! Brake activated !!!!");
+   Execution_Time (WCET_Brake);
+end Activate_Brake;
 
 ---------------------------------------------------------------------------------------
 begin

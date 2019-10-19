@@ -29,8 +29,8 @@ package body add is
     -----------------------------------------------------------------------
       task GuardardistanciaSeguridad;
       task Guardarcabeza_inclinada;
-      task Riesgos;
-      task Display;
+    --  task Riesgos;
+      --task Display;
     -- Aqui se declaran las tareas que forman el STR
     -----------------------------------------------------------------------
     ------------- body of tasks 
@@ -54,7 +54,7 @@ task body GuardardistanciaSeguridad is
 	   --Peligro de colision
              Put_Line("peligro de colision");
 
-	elsif((distancia/2)<distanciaSeg)then
+	elsif((distanciaR/2)<distanciaSeg)then
 	   --Light(OFF);
 	   --Distancia imprudente
              Put_Line("distancia imprudente");

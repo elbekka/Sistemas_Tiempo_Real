@@ -10,6 +10,7 @@ package devices is
     WCET_Distance: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(12);
     WCET_Speed: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(7);
     WCET_HeadPosition: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(4);
+    WCET_Steering: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(7);
 
     WCET_Eyes_Image: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(20);
     WCET_EEG: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(18);
@@ -18,6 +19,7 @@ package devices is
     WCET_Alarm: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_Light: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_Automatic_Driving: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
+    WCET_Brake: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
 
 
     ---------------------------------------------------------------------
@@ -69,12 +71,20 @@ package devices is
     -- It reads the distance with the previous vehicle: from 0m. to 150m. 
 
     ---------------------------------------------------------------------
-    ------ SPEED -----------------------------------------------------
+    ------ SPEED --------------------------------------------------------
 
     type Speed_Samples_Type is new natural range 0..200;
 
     procedure Reading_Speed (V: out Speed_Samples_Type);
     -- It reads the current vehicle speed: from 0m. to 200m. 
+
+    ---------------------------------------------------------------------
+    ------ STEERING WHEEL -----------------------------------------------
+
+    type Steering_Samples_Type is new integer range -180..180;
+
+    procedure Reading_Steering (S: out Steering_Samples_Type);
+    -- It reads the current position of the steering wheel: from -180 to 180 
 
     ---------------------------------------------------------------------
     ------ OUTPUT devices interface  
@@ -100,6 +110,10 @@ package devices is
     ---------------------------------------------------------------------
     procedure Display_Speed (V: Speed_Samples_Type);
     -- It displays the speed V
+
+    ---------------------------------------------------------------------
+    procedure Display_Steering (S: Steering_Samples_Type);
+    -- It displays the steering wheel position S
 
     --------------------------------------------------------------------
     procedure Display_HeadPosition_Sample (H: HeadPosition_Samples_Type);
@@ -241,6 +255,44 @@ package devices is
 
                  (+47,+03),(+47,+03),(+47,+01),(+45,+00),(+45,-03),  
                  (+47,+03),(+47,+03),(+47,+01),(+46,+00),(+46,-03) );  --10s.
+
+    ---------------------------------------------------------------------
+    ------ STEERING WHEEL -----------------------------------------------
+
+    cantidad_datos_Volante: constant := 100;
+    type Indice_Secuencia_Volante is mod cantidad_datos_Volante;
+    type tipo_Secuencia_Volante is array (Indice_Secuencia_Volante) of Steering_Samples_Type;
+
+    Steering_Simulation: tipo_Secuencia_Volante :=
+                 (  0,  0, 0,  5, 4,   -- 1 muestra cada 100ms.
+                    0, -2, 0, -3, 0,   -- 1s.
+ 
+                   10,10,10,15,10, 
+                   10,10,10,15,15,   -- 2s.
+
+                   20,20,20,25,29, 
+                   19,19,10,10,05,   -- 3s.
+
+                   00,00,00,05,05, 
+                   -05,-05,00,00,10,  -- 4s.
+
+                   11,21,20,35,35, 
+                   35,35,40,45,50,    -- 5s.
+
+                   00,00,01,-01,05, 
+                   02,00,00,-02,02,   -- 6s.
+ 
+                   00,00,01,-01,05, 
+                   02,00,00,-02,02,   -- 7s.
+
+                   00,00,01,-01,05, 
+                   02,00,00,-02,02,   -- 8s.
+
+                   00,00,01,-01,05, 
+                   02,00,00,-02,02,   -- 9s.
+
+                   00,00,01,-01,05, 
+                   02,00,00,-02,02 ); -- 10s.
 
     ---------------------------------------------------------------------
     ------ EYESIMAGE ----------------------------------------------------
