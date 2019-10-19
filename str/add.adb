@@ -49,19 +49,19 @@ task body GuardardistanciaSeguridad is
 	Reading_Speed(velocidad);
 	Reading_Distance (distanciaR);
 	distanciaSeg:= Distance_Samples_Type ((velocidad/10)*(velocidad/10));
-	if((distanciaR/3) < distanciaSeg) then
+	--if((distanciaR/3) < distanciaSeg) then
 	   --Light(ON);
 	   --Peligro de colision
-             Put_Line("peligro de colision");
+             
 
-	elsif((distanciaR/2)<distanciaSeg)then
+	--elsif((distanciaR/2)<distanciaSeg)then
 	   --Light(OFF);
 	   --Distancia imprudente
-             Put_Line("distancia imprudente");
-	else
+            
+	--else
 	   --No hay peligro
-       Put_Line("no hay peligro");
-	end if;
+       
+	--end if;
       Finishing_Notice  ("Finaliza Distancia Seguridad ");
     	delay until Siguiente_instancia;
     	Siguiente_instancia:=Siguiente_instancia+Intervalo;
@@ -81,17 +81,17 @@ task body Guardarcabeza_inclinada is
          Siguiente_instancia:=clock+Intervalo;
 	Reading_HeadPosition(act);
         
-	if((act(x)>(30) and  ant(x)>(30)) or (act(x)<(-30) and ant(x)<(-30))) then 
-         Put_Line("la cabeza esta inclinada hacia delante o hacia atrás");
-        elsif (((ant(y)>(30)) and (act(y)>(30))) and(giro_del_volante>(5))) then
-          Put_Line("no hay somnolencia, estamos girando");
-        elsif (((ant(y)<(-30)) and (act(y)<(-30))) and (giro_del_volante<(-5))) then
-           Put_Line("no hay somnolencia, estamos girando");
-        elsif ((act(y)>(30) or act(y)<(-30)) and (giro_del_volante<(5) or giro_del_volante>(-5))) then
-          Put_Line("sintoma de somnolencia");
-        else 
-         Put_Line("no esta la cabeza inclinada");
-	end if;
+	--if((act(x)>(30) and  ant(x)>(30)) or (act(x)<(-30) and ant(x)<(-30))) then 
+     --    Put_Line("la cabeza esta inclinada hacia delante o hacia atrás");
+       -- elsif (((ant(y)>(30)) and (act(y)>(30))) and(giro_del_volante>(5))) then
+         -- Put_Line("no hay somnolencia, estamos girando");
+        --elsif (((ant(y)<(-30)) and (act(y)<(-30))) and (giro_del_volante<(-5))) then
+          -- Put_Line("no hay somnolencia, estamos girando");
+        --elsif ((act(y)>(30) or act(y)<(-30)) and (giro_del_volante<(5) or giro_del_volante>(-5))) then
+          --Put_Line("sintoma de somnolencia");
+        --else 
+         --Put_Line("no esta la cabeza inclinada");
+	--end if;
 
 	ant(x):=act(x);
         ant(y):=act(y);
