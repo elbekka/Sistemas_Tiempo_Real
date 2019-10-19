@@ -39,6 +39,8 @@ package body sintomas is
         _Distancia:=distanciaIn;
         end EscribirDistancia;
         end Distancia;
+        begin 
+        null;
 end ProcedureSintomas;
 begin
     null;
