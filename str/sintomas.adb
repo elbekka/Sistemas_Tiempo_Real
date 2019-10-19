@@ -28,7 +28,7 @@ package body sintomas is
         end EscribirCabeza;
         end Cabeza;
 
-    procedure body Distancia is 
+    protected body Distancia is 
         Procedure LeerDistancia(distanciaOut : out Natural) is 
         begin 
             distanciaOut:=Distancia;
