@@ -52,11 +52,15 @@ task body GuardardistanciaSeguridad is
 	if((distanciaR/3) < distanciaSeg) then
 	   --Light(ON);
 	   --Peligro de colision
+             Put_Line("peligro de colision");
+
 	elsif((distancia/2)<distanciaSeg)then
 	   --Light(OFF);
 	   --Distancia imprudente
+             Put_Line("distancia imprudente");
 	else
 	   --No hay peligro
+       Put_Line("no hay peligro");
 	end if;
       Finishing_Notice  ("Finaliza Distancia Seguridad ");
     	delay until Siguiente_instancia;
