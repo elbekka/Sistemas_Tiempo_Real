@@ -1,20 +1,20 @@
+
+--Declaracion de tipos que se van a usar en el paquete.
 type Boolean is (False,True);
 type Tipo_Distancia is (SEGURA,INSEGURA,IMPRUDENTE,COLISION);
-
+--Paquete Sintormas,incluye el objeto protegido para la evaluacion de sintomas.
 package sintomas is 
-    protected Cabeza is
+    protected Protected_Inclinacion is
         pragma priority (10);
-        procedure LeerCabeza(cabezaOut : out Boolean);
-        Procedure EscribirCabeza(cabezaIn : in Boolean);
-        private
-        CabezaVar : Boolean := False;
-        end Cabeza;
-    --protected Distancia is
-      pragma priority (9);
-        Procedure LeerDistancia(distanciaOut:out Natural);
-        Procedure EscribirDistancia(distanciaIn:in Natural);
-        private
-        DistanciaVar : Natural range 1..3;
-        end Distancia;
+        --Declaracion de procedures para la inclinacion de la cabeza.
+        procedure LeerInclinacionCabeza(InclinacionOut : out Boolean);
+        Procedure EscribirInclinacionCabeza(InclinacionIn : in Boolean);
 
+        --Declaracion de procedures para la distancia.
+        procedure LeerDistancia(distanciaOut : out Tipo_Distancia);
+        procedure EscribirDistancia(distanciaIn : in Tipo_Distancia);
+        private
+        inclinacionCabeza : Boolean := False;
+        distancia : Tipo_Distancia;
+    end Protected_Inclinacion;
 end sintomas;

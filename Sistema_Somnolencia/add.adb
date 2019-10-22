@@ -21,8 +21,7 @@ package body add is
       loop
         null;
       end loop;
-    end Background;
-    ----------------------------------------------------------------------
+    end Background;--Proceso ocioso   (se ejecuta cuando no hay ningun proceso en ejecucion ----------------------------------------------------------------------
 
     -----------------------------------------------------------------------
     ------------- declaration of tasks 
