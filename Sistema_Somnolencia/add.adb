@@ -65,9 +65,9 @@ package body add is
       begin
             loop
                Starting_Notice("Inicio Display");
-               mediciones.LeerDistancia(Distancia_Actual);
+               Protected_Mediciones.LeerDistancia(Distancia_Actual);
                put("||--Distancia actual >>  ");
-               put_line( Distancia_Actual'Image );
+               put_line(Distancia_Actual'Image );
                Finishing_Notice ("Fin Display"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
