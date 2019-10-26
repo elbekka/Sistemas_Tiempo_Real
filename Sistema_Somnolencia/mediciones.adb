@@ -5,15 +5,15 @@ package body mediciones is
       begin
         DistanciaOut := distancia;
       end LeerDistancia;
-    Procedure body EscribirDistancia(DistanciaIn : in Distance_Samples_Type) is
+    Procedure  EscribirDistancia(DistanciaIn : in Distance_Samples_Type) is
       begin
         distancia:=DistanciaIn;
       end EscribirDistancia;
-    procedure body LeerVelocidad(VelocidadOut : out Speed_Samples_Type) is
+    procedure  LeerVelocidad(VelocidadOut : out Speed_Samples_Type) is
       begin
       VelocidadOut:= velocidad;
       end LeerVelocidad;
-    procedure body  EscribirVelocidad(VelocidadIn : in Speed_Samples_Type) is
+    procedure   EscribirVelocidad(VelocidadIn : in Speed_Samples_Type) is
       begin
       velocidad:=VelocidadIn;
      end EscribirVelocidad;
