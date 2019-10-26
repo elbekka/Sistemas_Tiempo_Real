@@ -66,8 +66,7 @@ package body add is
             loop
                Starting_Notice("Inicio Display");
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
-               put("||--Distancia actual >>  ");
-               put_line(Distancia_Actual);
+               Display_Distance(Distancia_Actual);
                Finishing_Notice ("Fin Display"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
