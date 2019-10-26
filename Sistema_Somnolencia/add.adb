@@ -48,7 +48,7 @@ package body add is
             Starting_Notice ("Distancia Seguridad");
             Reading_Distance (Distancia_Actual);
             Reading_Speed (Velocidad_Actual);
-
+            Display_Distance(Distancia_Actual);
             Protected_Mediciones.EscribirDistancia(Distancia_Actual);
             Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
 
