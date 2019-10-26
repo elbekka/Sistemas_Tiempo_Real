@@ -106,7 +106,7 @@ package devices is
     ---------------------------------------------------------------------
     procedure Display_Distance (D: Distance_Samples_Type);
     -- It displays the distance D
-    procedure Display_Distance_Type(Distance_Type :Tipo_Distancia );
+    --procedure Display_Distance_Type(Distance_Type :Tipo_Distancia );
     ---------------------------------------------------------------------
     procedure Display_Speed (V: Speed_Samples_Type);
     -- It displays the speed V

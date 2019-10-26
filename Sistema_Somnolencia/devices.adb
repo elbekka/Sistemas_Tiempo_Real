@@ -301,13 +301,13 @@ begin
    Execution_Time (WCET_Display);
 end Display_Pulse_Rate;
 -----------------------------------------------------------------------------
-procedure Display_Distance_Type(Distance_Type :Tipo_Distancia ) is 
-   begin
-     Current_Time(Big_Bang);
-     Put ("............# ");
-     Put("Distance Type :");
-     Put(Distance_Type'Image);
-   end Display_Distance_Type;
+--procedure Display_Distance_Type(Distance_Type :Tipo_Distancia ) is 
+  -- begin
+    -- Current_Time(Big_Bang);
+     --Put ("............# ");
+     --Put("Distance Type :");
+     --Put(Distance_Type'Image);
+   --end Display_Distance_Type;
 -----------------------------------------------------------------------------
 procedure Display_Distance (D: Distance_Samples_Type) is
 begin
