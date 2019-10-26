@@ -1,6 +1,6 @@
 --Declaracion de tipos que se van a usar en el paquete.
 
-with devices;
+with devices;use devices;
 --Paquete mediciones,incluye el objeto protegido para almacenar las mediciones.
 package mediciones is 
     protected Protected_Mediciones is
