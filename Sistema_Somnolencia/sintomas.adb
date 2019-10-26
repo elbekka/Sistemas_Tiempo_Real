@@ -1,7 +1,7 @@
 
 package body sintomas is 
     --Body Cabeza
-    protected body Protected_Inclinacion is 
+    protected body Protected_Sintomas is 
         Procedure LeerInclinacionCabeza(InclinacionOut : out Boolean) is
             begin
                 InclinacionOut:= inclinacionCabeza;
@@ -18,7 +18,7 @@ package body sintomas is
             begin
                 distancia:=distanciaIn;
          end EscribirDistancia;
-    end Protected_Inclinacion;
+    end Protected_Sintomas;
 begin
     null;
 end sintomas;
