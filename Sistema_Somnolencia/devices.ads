@@ -66,7 +66,7 @@ package devices is
     ------ DISTANCE -----------------------------------------------------
 
     type Distance_Samples_Type is new natural range 0..150;
-    type Tipo_Distancia is (SEGURA,INSEGURA,IMPRUDENTE,COLISION);
+    --type Tipo_Distancia is (SEGURA,INSEGURA,IMPRUDENTE,COLISION);
     procedure Reading_Distance (L: out Distance_Samples_Type);
     -- It reads the distance with the previous vehicle: from 0m. to 150m. 
 
