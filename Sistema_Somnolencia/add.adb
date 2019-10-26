@@ -6,7 +6,8 @@ with sintomas; use sintomas;
 
 with Tools; use Tools;
 with Devices; use Devices;
-
+with sintomas ; use sintomas;
+with mediciones ; use mediciones;
 -- Packages needed to generate pulse interrupts       
 -- with Ada.Interrupts.Names;
 -- with Pulse_Interrupt; use Pulse_Interrupt;
