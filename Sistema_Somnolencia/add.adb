@@ -75,7 +75,6 @@ package body add is
          end Display;
 begin
    Starting_Notice ("Programa Principal");
-   Prueba_Dispositivos;
    Finishing_Notice ("Programa Principal");
 end add;
 
