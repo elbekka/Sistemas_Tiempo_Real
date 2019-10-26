@@ -49,10 +49,10 @@ package body add is
             Reading_Distance (Distancia_Actual);
             Reading_Speed (Velocidad_Actual);
 
-            mediciones.EscribirDistancia(Distancia_Actual);
-            mediciones.EscribirVelocidad(Velocidad_Actual);
+            Protected_Mediciones.EscribirDistancia(Distancia_Actual);
+            Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
 
-            Distancia_Segura := ( Distancia_Actual * Velocidad_Actual) / 100;       
+            --Distancia_Segura := ( Distancia_Actual * Velocidad_Actual) / 100;       
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
             Finishing_Notice ("Distancia Seguridad"); 
