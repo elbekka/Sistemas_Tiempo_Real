@@ -46,7 +46,7 @@
             Velocidad_Actual: Speed_Samples_Type := 0;
          Distancia_Segura: Speed_Samples_Type := 0;
          Duration_3ms: Time_Span := To_time_Span(0.3);
-         Periodo_Siguiente: Time := Clock + Duration_3ms;
+         Periodo_Siguiente: Time := Big_Bang + Duration_3ms;
          begin
           loop
             Starting_Notice ("Distancia Seguridad Init");
@@ -56,7 +56,7 @@
             Protected_Mediciones.EscribirDistancia(Distancia_Actual);
             Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
             --Calculamos la distancia segura 
-            Distancia_Segura := ( Distance_Samples_Type'Image(Distancia_Actual) *Speed_Samples_Type'Image(Velocidad_Actual)) / 100; 
+            Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
 
             --Comprobaciones
 
@@ -78,7 +78,7 @@
         Distancia_Actual: Distance_Samples_Type := 0;
         Tipo_Distancia_Actual : Tipo_Distancia;
        Duration_1ms: Time_Span := To_time_Span(1.0);
-      Periodo_Siguiente: Time := Clock + Duration_1ms;
+      Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
       begin
             loop
                Starting_Notice("Inicio Display");
