@@ -1,8 +1,9 @@
 --Declaracion de tipos que se van a usar en el paquete.
 
-with devices;use devices;
 --Paquete mediciones,incluye el objeto protegido para almacenar las mediciones.
 package mediciones is 
+with devices;use devices;
+
     protected Protected_Mediciones is
         pragma priority (9);
         --Declaracion de procedures para la distancia.
