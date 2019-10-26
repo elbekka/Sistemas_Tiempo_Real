@@ -31,10 +31,10 @@ package body add is
      -- task Guardarcabeza_inclinada;
     --  task Riesgos;
       task DistanciaSeguridad is 
-         pragma priority(10);
+         pragma priority(4);
          end DistanciaSeguridad;
       task Display is 
-         pragma priority(9);
+         pragma priority(5);
          end Display;
     -- Aqui se declaran las tareas que forman el STR
     -----------------------------------------------------------------------
