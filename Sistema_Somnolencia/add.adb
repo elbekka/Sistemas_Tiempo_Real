@@ -30,8 +30,12 @@ package body add is
       --task GuardardistanciaSeguridad;
      -- task Guardarcabeza_inclinada;
     --  task Riesgos;
-      task DistanciaSeguridad;
-      task Display;
+      task DistanciaSeguridad is 
+         pragma priority(8);
+         end DistanciaSeguridad;
+      task Display is 
+         pragma priority(5);
+         end Display;
     -- Aqui se declaran las tareas que forman el STR
     -----------------------------------------------------------------------
     ------------- body of tasks 
