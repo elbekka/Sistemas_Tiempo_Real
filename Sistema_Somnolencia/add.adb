@@ -81,10 +81,12 @@
       Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
       begin
             loop
-               Starting_Notice("Inicio Display");
+               Starting_Notice("Display Init");
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                Display_Distance(Distancia_Actual);
+               Put(" ");
+               Put("..........# Tipo Distancia:")
                Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
                Finishing_Notice ("Fin Display"); 
             delay until Periodo_Siguiente;
