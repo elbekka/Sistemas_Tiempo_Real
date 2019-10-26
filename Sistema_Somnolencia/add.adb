@@ -56,7 +56,7 @@
             Protected_Mediciones.EscribirDistancia(Distancia_Actual);
             Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
             --Calculamos la distancia segura 
-            Distancia_Segura := ( Distancia_Actual * Velocidad_Actual) / 100; 
+            Distancia_Segura := ( Distance_Samples_Type'Image(Distancia_Actual) *Speed_Samples_Type'Image(Velocidad_Actual)) / 100; 
 
             --Comprobaciones
 
