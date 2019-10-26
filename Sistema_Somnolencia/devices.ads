@@ -21,7 +21,7 @@ package devices is
     WCET_Automatic_Driving: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_Brake: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
 
-
+    
     ---------------------------------------------------------------------
     ------ INPUT devices interface
     ---------------------------------------------------------------------
@@ -66,7 +66,7 @@ package devices is
     ------ DISTANCE -----------------------------------------------------
 
     type Distance_Samples_Type is new natural range 0..150;
-
+    type Tipo_Distancia is (SEGURA,INSEGURA,IMPRUDENTE,COLISION);
     procedure Reading_Distance (L: out Distance_Samples_Type);
     -- It reads the distance with the previous vehicle: from 0m. to 150m. 
 
@@ -106,7 +106,7 @@ package devices is
     ---------------------------------------------------------------------
     procedure Display_Distance (D: Distance_Samples_Type);
     -- It displays the distance D
-
+    procedure Display_Distance_Type(Distance_Type :Tipo_Distancia );
     ---------------------------------------------------------------------
     procedure Display_Speed (V: Speed_Samples_Type);
     -- It displays the speed V
