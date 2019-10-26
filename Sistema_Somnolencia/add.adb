@@ -31,10 +31,10 @@ package body add is
      -- task Guardarcabeza_inclinada;
     --  task Riesgos;
       task DistanciaSeguridad is 
-         pragma priority(8);
+         pragma priority(10);
          end DistanciaSeguridad;
       task Display is 
-         pragma priority(5);
+         pragma priority(9);
          end Display;
     -- Aqui se declaran las tareas que forman el STR
     -----------------------------------------------------------------------
@@ -52,7 +52,6 @@ package body add is
             Starting_Notice ("Distancia Seguridad");
             Reading_Distance (Distancia_Actual);
             Reading_Speed (Velocidad_Actual);
-            Display_Distance(Distancia_Actual);
             Protected_Mediciones.EscribirDistancia(Distancia_Actual);
             Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
 
