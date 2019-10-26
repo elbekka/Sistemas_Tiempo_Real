@@ -85,7 +85,7 @@
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                Display_Distance(Distancia_Actual);
-               Put_Line(Tipo_Distancia_Actual'Image);
+               Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
                Finishing_Notice ("Fin Display"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
