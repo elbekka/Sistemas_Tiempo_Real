@@ -29,34 +29,70 @@
       -----------------------------------------------------------------------
          --task GuardardistanciaSeguridad;
       -- task Guardarcabeza_inclinada;
-      --  task Riesgos;
+         task CabezaInclinada is 
+            pragma priority(3);
+            end CabezaInclinada;
+         task Riesgos is 
+            pragma priority(5);
+            end Riesgos;
          task DistanciaSeguridad is 
-            pragma priority(4);
+            pragma priority(2);
             end DistanciaSeguridad;
          task Display is 
-            pragma priority(5);
+            pragma priority(1);
             end Display;
       -- Aqui se declaran las tareas que forman el STR
       -----------------------------------------------------------------------
       ------------- body of tasks 
       -----------------------------------------------------------------------
+         task body CabezaInclinada is 
+               PosicionCabezaActual: HeadPosition_Samples_Type := (+2,-2);
+      PosicionCabezaAnterior: HeadPosition_Samples_Type := (0,0);
+      Volante: Steering_Samples_Type := 0;
+      Duracion_4ms: Time_Span := To_time_Span(0.4);
+      Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
+      begin
+          loop
+            Starting_Notice ("Cabeza"); 
+            Reading_HeadPosition (PosicionCabezaActual);
+            Reading_Steering (Volante);
 
+            if ( abs( PosicionCabezaActual(x) ) > 30 and abs( PosicionCabezaAnterior(x) ) > 30 ) then 
+              -- symptom.setIsTilted( Boolean'Val(1) );
+              Protected_Sintomas.EscribirInclinacionCabeza(True);
+            elsif ( ( PosicionCabezaActual(y) > 30 and PosicionCabezaAnterior(y) > 30 and Volante < 5) or 
+               ( ( PosicionCabezaActual(y) < -30 and PosicionCabezaAnterior(y) < -30 and Volante > 5) ) ) then 
+              -- symptom.setIsTilted( Boolean'Val(1) );
+              Protected_Sintomas.EscribirInclinacionCabeza(True);
+            else
+              -- symptom.setIsTilted( Boolean'Val(0) );
+              Protected_Sintomas.EscribirInclinacionCabeza(False);
+            end if;
+            PosicionCabezaAnterior := PosicionCabezaActual;
+            Finishing_Notice ("Cabeza");             
+            delay until Periodo_Siguiente;
+            Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
+         end loop;
+            end CabezaInclinada;
+         task body Riesgos is 
+            begin
+            end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
             Velocidad_Actual: Speed_Samples_Type := 0;
-         Distancia_Segura: Speed_Samples_Type := 0;
-         Duration_3ms: Time_Span := To_time_Span(0.3);
-         Periodo_Siguiente: Time := Big_Bang + Duration_3ms;
-         begin
-          loop
-            Starting_Notice ("Distancia Seguridad Init");
-            --Leemos los sensores de distancia y velocidad
-            Reading_Distance (Distancia_Actual);
-            Reading_Speed (Velocidad_Actual);
-            Protected_Mediciones.EscribirDistancia(Distancia_Actual);
-            Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
-            --Calculamos la distancia segura 
-            Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
+            Distancia_Segura: Speed_Samples_Type := 0;
+            Duration_3ms: Time_Span := To_time_Span(0.3);
+            Periodo_Siguiente: Time := Big_Bang + Duration_3ms;
+            begin
+               loop
+                  Starting_Notice ("Distancia Seguridad Init");
+                  --Leemos los sensores de distancia y velocidad
+                  Reading_Distance (Distancia_Actual);
+                  Reading_Speed (Velocidad_Actual);
+                  Protected_Mediciones.EscribirDistancia(Distancia_Actual);
+                  Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
+                  --Calculamos la distancia segura 
+                  Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
 
             --Comprobaciones
 
@@ -71,24 +107,28 @@
             end if;      
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
-            Finishing_Notice ("Distancia Seguridad"); 
-         end loop;
-         end DistanciaSeguridad;
-      task body Display is 
-        Distancia_Actual: Distance_Samples_Type := 0;
-        Tipo_Distancia_Actual : Tipo_Distancia;
-       Duration_1ms: Time_Span := To_time_Span(1.0);
-      Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
-      begin
+            Finishing_Notice ("Distancia Seguridad Fin"); 
+          end loop;
+            end DistanciaSeguridad;
+         task body Display is 
+            Distancia_Actual: Distance_Samples_Type := 0;
+          Tipo_Distancia_Actual : Tipo_Distancia;
+          Duration_1ms: Time_Span := To_time_Span(1.0);
+          Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
+          ValorInclinacion : Boolean ;
+          begin
             loop
                Starting_Notice("Display Init");
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
+               Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
                Display_Distance(Distancia_Actual);
                Put(" ");
-               Put("..........# Tipo Distancia:")
+               Put("..........# Tipo Distancia:");
                Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
-               Finishing_Notice ("Fin Display"); 
+               Put("..........# Cabeza Inclinada:");
+               Put_Line(Boolean'Image(ValorInclinacion));
+               Finishing_Notice ("Display Fin"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
             end loop;
