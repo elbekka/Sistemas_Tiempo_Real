@@ -47,10 +47,10 @@
       -----------------------------------------------------------------------
          task body CabezaInclinada is 
                PosicionCabezaActual: HeadPosition_Samples_Type := (+2,-2);
-      PosicionCabezaAnterior: HeadPosition_Samples_Type := (0,0);
-      Volante: Steering_Samples_Type := 0;
-      Duracion_4ms: Time_Span := To_time_Span(0.4);
-      Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
+               PosicionCabezaAnterior: HeadPosition_Samples_Type := (0,0);
+               Volante: Steering_Samples_Type := 0;
+               Duracion_4ms: Time_Span := To_time_Span(0.4);
+               Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
       begin
           loop
             Starting_Notice ("Cabeza"); 
@@ -58,14 +58,11 @@
             Reading_Steering (Volante);
 
             if ( abs( PosicionCabezaActual(x) ) > 30 and abs( PosicionCabezaAnterior(x) ) > 30 ) then 
-              -- symptom.setIsTilted( Boolean'Val(1) );
               Protected_Sintomas.EscribirInclinacionCabeza(True);
             elsif ( ( PosicionCabezaActual(y) > 30 and PosicionCabezaAnterior(y) > 30 and Volante < 5) or 
                ( ( PosicionCabezaActual(y) < -30 and PosicionCabezaAnterior(y) < -30 and Volante > 5) ) ) then 
-              -- symptom.setIsTilted( Boolean'Val(1) );
               Protected_Sintomas.EscribirInclinacionCabeza(True);
             else
-              -- symptom.setIsTilted( Boolean'Val(0) );
               Protected_Sintomas.EscribirInclinacionCabeza(False);
             end if;
             PosicionCabezaAnterior := PosicionCabezaActual;
@@ -76,7 +73,10 @@
             end CabezaInclinada;
          task body Riesgos is 
             begin
-               null;
+               loop
+                               Finishing_Notice ("Riesro"); 
+
+                  end loop;
             end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
