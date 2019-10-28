@@ -76,6 +76,7 @@
             end CabezaInclinada;
          task body Riesgos is 
             begin
+               null;
             end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
