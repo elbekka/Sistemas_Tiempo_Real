@@ -116,7 +116,7 @@
           Tipo_Distancia_Actual : Tipo_Distancia;
           Duration_1ms: Time_Span := To_time_Span(1.0);
           Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
-          ValorInclinacion : Boolean ;
+          ValorInclinacion : Sintomas.Boolean ;
           begin
             loop
                Starting_Notice("Display Init");
@@ -128,7 +128,7 @@
                Put("..........# Tipo Distancia:");
                Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
                Put("..........# Cabeza Inclinada:");
-               Put_Line(Boolean'Image(ValorInclinacion));
+               Put_Line(Sintomas.Boolean'Image(ValorInclinacion));
                Finishing_Notice ("Display Fin"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
