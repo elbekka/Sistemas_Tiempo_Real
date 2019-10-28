@@ -124,7 +124,7 @@
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
                Display_Distance(Distancia_Actual);
-               Put(" ");
+               Put_Line(" ");
                Put("..........# Tipo Distancia:");
                Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
                Put("..........# Cabeza Inclinada:");
