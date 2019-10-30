@@ -90,9 +90,9 @@
                Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
             
 
-               if( ( CabezaInclinada = sintomas.Boolean'Val(0) ) and ( Velocidad_Actual > 70 )) then
+               if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
                   Beep(2);
-               elsif ( CabezaInclinada = sintomas.Boolean'Val(0) ) then
+               elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
                   Beep(1);
                end if;
 
@@ -102,7 +102,7 @@
                when others => Light(Off);
                end case;
                
-               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean(True)) ) then
+               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
                   Beep(5);
                   Activate_Automatic_Driving;
                end if;
