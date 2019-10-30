@@ -86,8 +86,8 @@
                Starting_Notice ("Riesgos Init");
                
                Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
+               Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
                Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
-               Protected_Mediciones.LeerDistancia( Tipo_Distancia_Var );
             
 
                if( ( CabezaInclinada = sintomas.Boolean'Val(0) ) and ( Velocidad_Actual > 70 )) then
@@ -102,7 +102,7 @@
                when others => Light(Off);
                end case;
                
-               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  CabezaInclinada ) then
+               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean(True)) ) then
                   Beep(5);
                   Activate_Automatic_Driving;
                end if;
