@@ -37,7 +37,7 @@
             end if;
          end Comprobacion_Cabeza_Inclinada;
 
-      procedure Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura : in Distance_Samples_Type) is 
+      procedure Comprobacion_DistanciaSeguridad(Distancia_Actual : in Distance_Samples_Type ;Distancia_Segura in Speed_Samples_Type) is 
          begin
                    if ( Speed_Samples_Type(Distancia_Actual) < ( Distancia_Segura / 3 ) ) then 
                   Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (3) );
