@@ -24,6 +24,18 @@
          end loop;
       end Background;--Proceso ocioso   (se ejecuta cuando no hay ningun proceso en ejecucion ----------------------------------------------------------------------
 
+      procedure Comprobacion_Cabeza_Inclinada(PosicionCabezaActual ,PosicionCabezaAnterior : in HeadPosition_Samples_Type;
+        Volante : in Steering_Samples_Type) is 
+       begin
+         if ( abs( PosicionCabezaActual(x) ) > 30 and abs( PosicionCabezaAnterior(x) ) > 30 ) then 
+              Protected_Sintomas.EscribirInclinacionCabeza(True);
+            elsif ( ( PosicionCabezaActual(y) > 30 and PosicionCabezaAnterior(y) > 30 and Volante < 5) or 
+               ( ( PosicionCabezaActual(y) < -30 and PosicionCabezaAnterior(y) < -30 and Volante > 5) ) ) then 
+              Protected_Sintomas.EscribirInclinacionCabeza(True);
+            else
+              Protected_Sintomas.EscribirInclinacionCabeza(False);
+            end if;
+         end Comprobacion_Cabeza_Inclinada;
       -----------------------------------------------------------------------
       ------------- declaration of tasks 
       -----------------------------------------------------------------------
@@ -53,20 +65,12 @@
                Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
       begin
           loop
-            Starting_Notice ("Cabeza"); 
+            Starting_Notice ("Cabeza Inclinada Init"); 
             Reading_HeadPosition (PosicionCabezaActual);
             Reading_Steering (Volante);
-
-            if ( abs( PosicionCabezaActual(x) ) > 30 and abs( PosicionCabezaAnterior(x) ) > 30 ) then 
-              Protected_Sintomas.EscribirInclinacionCabeza(True);
-            elsif ( ( PosicionCabezaActual(y) > 30 and PosicionCabezaAnterior(y) > 30 and Volante < 5) or 
-               ( ( PosicionCabezaActual(y) < -30 and PosicionCabezaAnterior(y) < -30 and Volante > 5) ) ) then 
-              Protected_Sintomas.EscribirInclinacionCabeza(True);
-            else
-              Protected_Sintomas.EscribirInclinacionCabeza(False);
-            end if;
+            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);
             PosicionCabezaAnterior := PosicionCabezaActual;
-            Finishing_Notice ("Cabeza");             
+            Finishing_Notice ("Cabeza Inclinada Fin");             
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
          end loop;
@@ -86,28 +90,23 @@
                Protected_Mediciones.LeerDistancia( Tipo_Distancia_Var );
             
 
-               -- Beep         
-               if( ( CabezaInclinada = Boolean'Val(0) ) and ( Velocidad_Actual > 70 )) then
+               if( ( CabezaInclinada = sintomas.Boolean'Val(0) ) and ( Velocidad_Actual > 70 )) then
                   Beep(2);
-               elsif ( CabezaInclinada = Boolean'Val(0) ) then
+               elsif ( CabezaInclinada = sintomas.Boolean'Val(0) ) then
                   Beep(1);
                end if;
-               -- End beep
 
-               -- Light
                case Tipo_Distancia_Var is
                when INSEGURA   => Light(On);
                when IMPRUDENTE => Light(On); Beep(3);
                when others => Light(Off);
                end case;
-               -- End Light
-
-               -- Automatic brake
+               
                if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  CabezaInclinada ) then
                   Beep(5);
                   Activate_Automatic_Driving;
                end if;
-               -- End Automatic brake
+               
 
                Finishing_Notice ("Riesgos Fin"); 
                  delay until Periodo_Siguiente;
