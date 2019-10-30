@@ -3,7 +3,7 @@ with devices;use devices;
 --Paquete mediciones,incluye el objeto protegido para almacenar las mediciones.
 package mediciones is 
     protected Protected_Mediciones is
-        pragma priority (9);
+        pragma priority (5);
         --Declaracion de procedures para la distancia.
         procedure LeerDistancia(DistanciaOut : out Distance_Samples_Type);
         Procedure EscribirDistancia(DistanciaIn : in Distance_Samples_Type);
