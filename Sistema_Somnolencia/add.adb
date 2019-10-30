@@ -76,7 +76,7 @@
          end loop;
             end CabezaInclinada;
       task body Riesgos is 
-                CabezaInclinada: Boolean;
+                CabezaInclinada: Sintomas.Boolean;
       Velocidad_Actual: Speed_Samples_Type := 0;
       Tipo_Distancia_Var: Tipo_Distancia;
       Duration_015ms: Time_Span := To_time_Span(0.15);
