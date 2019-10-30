@@ -36,6 +36,19 @@
               Protected_Sintomas.EscribirInclinacionCabeza(False);
             end if;
          end Comprobacion_Cabeza_Inclinada;
+
+      procedure Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura : in Distance_Samples_Type) is 
+         begin
+                   if ( Speed_Samples_Type(Distancia_Actual) < ( Distancia_Segura / 3 ) ) then 
+                  Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (3) );
+            elsif ( Speed_Samples_Type(Distancia_Actual) < ( Distancia_Segura / 2 ) ) then
+               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (2) );
+            elsif ( Speed_Samples_Type(Distancia_Actual) < Distancia_Segura ) then
+               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (1) );
+            else 
+               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (0) );
+            end if;      
+         end Comprobacion_DistanciaSeguridad;
       -----------------------------------------------------------------------
       ------------- declaration of tasks 
       -----------------------------------------------------------------------
@@ -127,20 +140,10 @@
                   Reading_Speed (Velocidad_Actual);
                   Protected_Mediciones.EscribirDistancia(Distancia_Actual);
                   Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
-                  --Calculamos la distancia segura 
                   Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
 
             --Comprobaciones
-
-              if ( Speed_Samples_Type(Distancia_Actual) < ( Distancia_Segura / 3 ) ) then 
-                  Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (3) );
-            elsif ( Speed_Samples_Type(Distancia_Actual) < ( Distancia_Segura / 2 ) ) then
-               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (2) );
-            elsif ( Speed_Samples_Type(Distancia_Actual) < Distancia_Segura ) then
-               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (1) );
-            else 
-               Protected_Sintomas.EscribirDistancia( Tipo_Distancia'Val (0) );
-            end if;      
+                  Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura);   
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
             Finishing_Notice ("Distancia Seguridad Fin"); 
@@ -148,22 +151,26 @@
             end DistanciaSeguridad;
          task body Display is 
             Distancia_Actual: Distance_Samples_Type := 0;
-          Tipo_Distancia_Actual : Tipo_Distancia;
-          Duration_1ms: Time_Span := To_time_Span(1.0);
-          Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
-          ValorInclinacion : Sintomas.Boolean ;
+            Velocidad_Actual: Speed_Samples_Type :=0;
+            Tipo_Distancia_Actual : Tipo_Distancia;
+            Duration_1ms: Time_Span := To_time_Span(1.0);
+            Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
+            ValorInclinacion : Sintomas.Boolean ;
           begin
             loop
                Starting_Notice("Display Init");
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
+               Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
                Display_Distance(Distancia_Actual);
+               Display_Speed(Velocidad_Actual);
                Put_Line(" ");
                Put("..........# Tipo Distancia:");
                Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
                Put("..........# Cabeza Inclinada:");
                Put_Line(Sintomas.Boolean'Image(ValorInclinacion));
+               Put_Line(" ");
                Finishing_Notice ("Display Fin"); 
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
