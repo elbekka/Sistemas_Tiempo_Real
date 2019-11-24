@@ -77,17 +77,17 @@
                Duracion_4ms: Time_Span := To_time_Span(0.4);
                Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
       begin
-          loop
-            Starting_Notice ("Cabeza Inclinada Init"); 
-            Reading_HeadPosition (PosicionCabezaActual);
-            Reading_Steering (Volante);
-            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);         
-            PosicionCabezaAnterior := PosicionCabezaActual;
-            Finishing_Notice ("Cabeza Inclinada Fin");             
-            delay until Periodo_Siguiente;
-            Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
-                     end loop;
-
+       --   loop
+         --   Starting_Notice ("Cabeza Inclinada Init"); 
+          --  Reading_HeadPosition (PosicionCabezaActual);
+           -- Reading_Steering (Volante);
+           -- Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);         
+            --PosicionCabezaAnterior := PosicionCabezaActual;
+            --Finishing_Notice ("Cabeza Inclinada Fin");             
+            --delay until Periodo_Siguiente;
+            --Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
+              --       end loop;
+null;
             end CabezaInclinada;
       task body Riesgos is 
                 CabezaInclinada: Sintomas.Boolean;
@@ -96,40 +96,38 @@
       Duration_015ms: Time_Span := To_time_Span(0.15);
       Periodo_Siguiente: Time := Big_Bang + Duration_015ms;
       begin
-      null;
-        --eloop
-               --Starting_Notice ("Riesgos Init");
-               --Starting_Notice ("Riesgos Init acceso a sintomas");
+      
+        loop
+        Starting_Notice ("Riesgos Init");
 
-              --- Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
-               --Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
-                   --           Finishing_Notice ("Riesgos Fin acceso a sintomas"); 
-                 --             Starting_Notice ("Riesgos Init acceso a mediciones");
-               --Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
-                 --             Finishing_Notice ("Riesgos Fin acceso a mediciones"); 
+               Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
+              Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
+                      
+              Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
+                      
 
-               --if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
-                --  Beep(2);
-              -- elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
-              --    Beep(1);
-             --  end if;
+               if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
+                 Beep(2);
+               elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
+                  Beep(1);
+               end if;
 
-            --   case Tipo_Distancia_Var is
-            --   when INSEGURA   => Light(On);
-             --  when IMPRUDENTE => Light(On); Beep(3);
-             --  when others => Light(Off);
-              -- end case;
+               case Tipo_Distancia_Var is
+               when INSEGURA   => Light(On);
+              when IMPRUDENTE => Light(On); Beep(3);
+              when others => Light(Off);
+             end case;
                
-               --if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
-                  --Beep(5);
-                 -- Activate_Automatic_Driving;
-               --end if;
+            if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
+            Beep(5);
+            Activate_Automatic_Driving;
+            end if;
                
 
-              -- Finishing_Notice ("Riesgos Fin"); 
-            --     delay until Periodo_Siguiente;
-          --     Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
-        -- end loop;
+             Finishing_Notice ("Riesgos Fin"); 
+                 delay until Periodo_Siguiente;
+               Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
+         end loop;
 
             end Riesgos;
          task body DistanciaSeguridad is 
@@ -157,7 +155,7 @@
               -- Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
                 --              Finishing_Notice ("Display fin acceso a mediciones"); 
 
-                                             Starting_Notice("Displey acceso a sintomas");
+                                             --Starting_Notice("Displey acceso a sintomas");
                --Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                --Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
                  --             Finishing_Notice ("Display Fin acesso a sintomas"); 
