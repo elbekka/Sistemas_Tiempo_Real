@@ -98,6 +98,7 @@
       Duration_015ms: Time_Span := To_time_Span(0.15);
       Periodo_Siguiente: Time := Big_Bang + Duration_015ms;
       begin
+      null;
         --eloop
                --Starting_Notice ("Riesgos Init");
                --Starting_Notice ("Riesgos Init acceso a sintomas");
