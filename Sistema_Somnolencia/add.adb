@@ -81,9 +81,7 @@
             Starting_Notice ("Cabeza Inclinada Init"); 
             Reading_HeadPosition (PosicionCabezaActual);
             Reading_Steering (Volante);
-            Starting_Notice ("Cabeza Inclinada acceso a recurso"); 
-            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);
-                        Finishing_Notice ("Cabeza inclinada fin acceso a recurso");             
+            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);         
             PosicionCabezaAnterior := PosicionCabezaActual;
             Finishing_Notice ("Cabeza Inclinada Fin");             
             delay until Periodo_Siguiente;
@@ -178,8 +176,6 @@
             --end loop;
          end Display;
 begin
-   Starting_Notice ("Programa Principal");
-   Finishing_Notice ("Programa Principal");
 end add;
 
 
