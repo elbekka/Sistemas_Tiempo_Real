@@ -115,7 +115,7 @@ null;
                case Tipo_Distancia_Var is
                when INSEGURA   => Light(On);
               when IMPRUDENTE => Light(On); Beep(3);
-              when others => Light(Off);
+              when others => null;--Light(Off);
              end case;
                
             if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
