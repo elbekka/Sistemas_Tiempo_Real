@@ -97,38 +97,38 @@ null;
       Periodo_Siguiente: Time := Big_Bang + Duration_015ms;
       begin
       
-        loop
-        Starting_Notice ("Riesgos Init");
+      --  loop
+        --Starting_Notice ("Riesgos Init");
 
-               Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
-              Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
+          --     Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
+            --  Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
                       
-              Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
+             -- Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
                       
 
-               if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
-                 Beep(2);
-               elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
-                  Beep(1);
-               end if;
+               --if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
+                 --Beep(2);
+               --elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
+                 -- Beep(1);
+               --end if;
 
-               case Tipo_Distancia_Var is
-               when INSEGURA   => Light(On);
-              when IMPRUDENTE => Light(On); Beep(3);
-              when others => null;--Light(Off);
-             end case;
+               --case Tipo_Distancia_Var is
+               --when INSEGURA   => Light(On);
+              --when IMPRUDENTE => Light(On); Beep(3);
+              --when others => null;--Light(Off);
+             --end case;
                
-            if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
-            Beep(5);
-            Activate_Automatic_Driving;
-            end if;
+            --if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
+            --Beep(5);
+            --Activate_Automatic_Driving;
+            --end if;
                
 
-             Finishing_Notice ("Riesgos Fin"); 
-                 delay until Periodo_Siguiente;
-               Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
-         end loop;
-
+             --Finishing_Notice ("Riesgos Fin"); 
+               --  delay until Periodo_Siguiente;
+               --Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
+         --end loop;
+            null;
             end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
@@ -137,7 +137,20 @@ null;
             Duration_3ms: Time_Span := To_time_Span(0.3);
             Periodo_Siguiente: Time := Big_Bang + Duration_3ms;
             begin
-               null;
+               
+                loop
+                  Starting_Notice ("Distancia Seguridad Init");
+                  Reading_Distance (Distancia_Actual);
+                  Reading_Speed (Velocidad_Actual);
+                  Starting_Notice ("Distnacia seguridad acceso Medidas");
+                  Protected_Mediciones.EscribirDistancia(Distancia_Actual);
+                  Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
+                  Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
+                  Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura);   
+            delay until Periodo_Siguiente;
+            Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
+            Finishing_Notice ("Distancia Seguridad Fin"); 
+          end loop;
             end DistanciaSeguridad;
          task body Display is 
             Distancia_Actual: Distance_Samples_Type := 0;
