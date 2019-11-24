@@ -147,9 +147,10 @@ null;
                   Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
                   Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
                   Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura);   
+                              Finishing_Notice ("Distancia Seguridad Fin"); 
+
             delay until Periodo_Siguiente;
             Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
-            Finishing_Notice ("Distancia Seguridad Fin"); 
           end loop;
             end DistanciaSeguridad;
          task body Display is 
