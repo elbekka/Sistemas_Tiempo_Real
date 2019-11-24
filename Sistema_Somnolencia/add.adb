@@ -86,7 +86,40 @@
       Duration_015ms: Time_Span := To_time_Span(0.15);
       Periodo_Siguiente: Time := Big_Bang + Duration_015ms;
       begin
-        null;
+        loop
+               Starting_Notice ("Riesgos Init");
+               Starting_Notice ("Riesgos Init acceso a sintomas");
+
+               Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
+               Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
+                              Finishing_Notice ("Riesgos Fin acceso a sintomas"); 
+                              Starting_Notice ("Riesgos Init acceso a mediciones");
+               Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
+                              Finishing_Notice ("Riesgos Fin acceso a mediciones"); 
+
+               if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
+                  Beep(2);
+               elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
+                  Beep(1);
+               end if;
+
+               case Tipo_Distancia_Var is
+               when INSEGURA   => Light(On);
+               when IMPRUDENTE => Light(On); Beep(3);
+               when others => Light(Off);
+               end case;
+               
+               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
+                  Beep(5);
+                  Activate_Automatic_Driving;
+               end if;
+               
+
+               Finishing_Notice ("Riesgos Fin"); 
+                 delay until Periodo_Siguiente;
+               Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
+         end loop;
+
             end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
@@ -105,30 +138,31 @@
             Periodo_Siguiente: Time := Big_Bang + Duration_1ms;
             ValorInclinacion : Sintomas.Boolean ;
           begin
-            loop
-               Starting_Notice("Display Init");
-                              Starting_Notice("Displey acceso a mediciones");
-               Protected_Mediciones.LeerDistancia(Distancia_Actual);
-               Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
-                              Finishing_Notice ("Display fin acceso a mediciones"); 
+            null;
+            --loop
+             --  Starting_Notice("Display Init");
+               --               Starting_Notice("Displey acceso a mediciones");
+               --Protected_Mediciones.LeerDistancia(Distancia_Actual);
+              -- Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
+                --              Finishing_Notice ("Display fin acceso a mediciones"); 
 
                                              Starting_Notice("Displey acceso a sintomas");
-               Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
-               Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
-                              Finishing_Notice ("Display Fin acesso a sintomas"); 
+               --Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
+               --Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
+                 --             Finishing_Notice ("Display Fin acesso a sintomas"); 
 
-               Display_Distance(Distancia_Actual);
-               Display_Speed(Velocidad_Actual);
-               Put_Line(" ");
-               Put("..........# Tipo Distancia:");
-               Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
-               Put("..........# Cabeza Inclinada:");
-               Put_Line(Sintomas.Boolean'Image(ValorInclinacion));
-               Put_Line(" ");
-               Finishing_Notice ("Display Fin"); 
-            delay until Periodo_Siguiente;
-            Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
-            end loop;
+               --Display_Distance(Distancia_Actual);
+               --Display_Speed(Velocidad_Actual);
+               --Put_Line(" ");
+               --Put("..........# Tipo Distancia:");
+               --Put_Line(Tipo_Distancia'Image(Tipo_Distancia_Actual));
+               --Put("..........# Cabeza Inclinada:");
+               --Put_Line(Sintomas.Boolean'Image(ValorInclinacion));
+               --Put_Line(" ");
+               --Finishing_Notice ("Display Fin"); 
+            --delay until Periodo_Siguiente;
+            --Periodo_Siguiente := Periodo_Siguiente + Duration_1ms;
+            --end loop;
          end Display;
 begin
    Starting_Notice ("Programa Principal");
