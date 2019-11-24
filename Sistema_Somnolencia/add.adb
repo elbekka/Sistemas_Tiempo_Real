@@ -77,16 +77,7 @@
                Duracion_4ms: Time_Span := To_time_Span(0.4);
                Periodo_Siguiente: Time := Big_Bang + Duracion_4ms;
       begin
-          loop
-            Starting_Notice ("Cabeza Inclinada Init"); 
-            Reading_HeadPosition (PosicionCabezaActual);
-            Reading_Steering (Volante);
-            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);
-            PosicionCabezaAnterior := PosicionCabezaActual;
-            Finishing_Notice ("Cabeza Inclinada Fin");             
-            delay until Periodo_Siguiente;
-            Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
-         end loop;
+          null;
             end CabezaInclinada;
       task body Riesgos is 
                 CabezaInclinada: Sintomas.Boolean;
@@ -95,36 +86,7 @@
       Duration_015ms: Time_Span := To_time_Span(0.15);
       Periodo_Siguiente: Time := Big_Bang + Duration_015ms;
       begin
-          loop
-               Starting_Notice ("Riesgos Init");
-               
-               Protected_Sintomas.LeerInclinacionCabeza( CabezaInclinada );
-               Protected_Sintomas.LeerDistancia( Tipo_Distancia_Var );
-               Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
-            
-
-               if( ( CabezaInclinada = sintomas.Boolean'Val(1) ) and ( Velocidad_Actual > 70 )) then
-                  Beep(2);
-               elsif ( CabezaInclinada = sintomas.Boolean'Val(1) ) then
-                  Beep(1);
-               end if;
-
-               case Tipo_Distancia_Var is
-               when INSEGURA   => Light(On);
-               when IMPRUDENTE => Light(On); Beep(3);
-               when others => Light(Off);
-               end case;
-               
-               if (( Tipo_Distancia_Var = Tipo_Distancia'Val(3) ) and  (CabezaInclinada=sintomas.Boolean'Val(1)) ) then
-                  Beep(5);
-                  Activate_Automatic_Driving;
-               end if;
-               
-
-               Finishing_Notice ("Riesgos Fin"); 
-                 delay until Periodo_Siguiente;
-               Periodo_Siguiente := Periodo_Siguiente + Duration_015ms;
-         end loop;
+        null;
             end Riesgos;
          task body DistanciaSeguridad is 
             Distancia_Actual: Distance_Samples_Type := 0;
@@ -133,21 +95,7 @@
             Duration_3ms: Time_Span := To_time_Span(0.3);
             Periodo_Siguiente: Time := Big_Bang + Duration_3ms;
             begin
-               loop
-                  Starting_Notice ("Distancia Seguridad Init");
-                  --Leemos los sensores de distancia y velocidad
-                  Reading_Distance (Distancia_Actual);
-                  Reading_Speed (Velocidad_Actual);
-                  Protected_Mediciones.EscribirDistancia(Distancia_Actual);
-                  Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
-                  Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
-
-            --Comprobaciones
-                  Comprobacion_DistanciaSeguridad(Distancia_Actual,Distancia_Segura);   
-            delay until Periodo_Siguiente;
-            Periodo_Siguiente := Periodo_Siguiente + Duration_3ms;
-            Finishing_Notice ("Distancia Seguridad Fin"); 
-          end loop;
+               null;
             end DistanciaSeguridad;
          task body Display is 
             Distancia_Actual: Distance_Samples_Type := 0;
@@ -159,10 +107,16 @@
           begin
             loop
                Starting_Notice("Display Init");
+                              Starting_Notice("Displey acceso a mediciones");
                Protected_Mediciones.LeerDistancia(Distancia_Actual);
                Protected_Mediciones.LeerVelocidad(Velocidad_Actual);
+                              Finishing_Notice ("Display fin acceso a mediciones"); 
+
+                                             Starting_Notice("Displey acceso a sintomas");
                Protected_Sintomas.LeerDistancia(Tipo_Distancia_Actual);
                Protected_Sintomas.LeerInclinacionCabeza(ValorInclinacion);
+                              Finishing_Notice ("Display Fin acesso a sintomas"); 
+
                Display_Distance(Distancia_Actual);
                Display_Speed(Velocidad_Actual);
                Put_Line(" ");

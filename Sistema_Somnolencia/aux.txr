@@ -1,0 +1,12 @@
+loop
+            Starting_Notice ("Cabeza Inclinada Init"); 
+            Reading_HeadPosition (PosicionCabezaActual);
+            Reading_Steering (Volante);
+            Starting_Notice ("Cabeza Inclinada acceso a recurso"); 
+            Comprobacion_Cabeza_Inclinada(PosicionCabezaActual,PosicionCabezaAnterior,Volante);
+                        Finishing_Notice ("Cabeza inclinada fin acceso a recurso");             
+            PosicionCabezaAnterior := PosicionCabezaActual;
+            Finishing_Notice ("Cabeza Inclinada Fin");             
+            delay until Periodo_Siguiente;
+            Periodo_Siguiente := Periodo_Siguiente + Duracion_4ms;
+                     end loop;
