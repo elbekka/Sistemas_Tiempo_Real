@@ -142,7 +142,7 @@ null;
                   Starting_Notice ("Distancia Seguridad Init");
                   Reading_Distance (Distancia_Actual);
                   Reading_Speed (Velocidad_Actual);
-                  Starting_Notice ("Distnacia seguridad acceso Medidas");
+                 -- Starting_Notice ("Distnacia seguridad acceso Medidas");
                   Protected_Mediciones.EscribirDistancia(Distancia_Actual);
                   Protected_Mediciones.EscribirVelocidad(Velocidad_Actual);
                   Distancia_Segura := (Velocidad_Actual * Velocidad_Actual)/ 100; 
